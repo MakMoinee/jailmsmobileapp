@@ -10,15 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JmsApp">
         <activity
+            android:name=".MainFormActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main_form"
+            android:theme="@style/Theme.JmsApp.NoActionBar" />
+        <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CreateAccountActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

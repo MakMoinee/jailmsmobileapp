@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/activity_create_account.xml" value="0.33" />
+        <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/content_main_form.xml" value="0.20416666666666666" />
         <entry key="..\:/JmsApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
       </map>
     </option>
