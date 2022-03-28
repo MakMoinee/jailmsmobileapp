@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.aclc.thesis.jmsapp.common.Constants;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,9 +17,9 @@ public class UserServiceImpl implements UserService {
     String response = "";
 
     @Override
-    public String retrieveUsersList(Context mContext) {
+    public String retrieveUser(Context mContext) {
         isResponded = false;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.FULL_URL + Constants.LOGIN_PATH, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 isResponded = true;

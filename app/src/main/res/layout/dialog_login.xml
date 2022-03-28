@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/lblSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SET IP"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/editIP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblSet"
+        android:layout_marginTop="10dp"
+        android:hint="Enter IP Address"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/btnSet"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editIP"
+        android:layout_marginTop="10dp"
+        android:background="#00cba9"
+        android:padding="10dp"
+        android:text="Proceed"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
+
+</RelativeLayout>

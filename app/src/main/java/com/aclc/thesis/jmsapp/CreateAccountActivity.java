@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.aclc.thesis.jmsapp.common.Constants;
+
 public class CreateAccountActivity extends AppCompatActivity {
 
     private EditText editUN, editPW, editConfirm, editFN, editMN, editLN;
@@ -51,11 +53,13 @@ public class CreateAccountActivity extends AppCompatActivity {
         editLN = findViewById(R.id.editLN);
         editMN = findViewById(R.id.editMN);
         btnCreate = findViewById(R.id.btnCreateAccount);
+
+        Constants.setIp(CreateAccountActivity.this);
     }
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         super.onBackPressed();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserParserIntf {
     List<Users> parseUsersList(String response);
+    Boolean parseUser(String response);
 }

@@ -4,61 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".MainActivity">
 
-   <EditText
-       android:lines="1"
-       android:maxLines="1"
-       android:minLines="1"
-       android:inputType="text"
-       android:padding="5dp"
-       android:layout_marginTop="50dp"
-       android:id="@+id/editUN"
-       android:textSize="25sp"
-       android:textColorHint="@android:color/black"
-       android:hint="Enter Username"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"/>
-
-    <EditText
-        android:lines="1"
-        android:maxLines="1"
-        android:minLines="1"
-        android:inputType="textPassword"
-        android:padding="5dp"
-        android:textColorHint="@android:color/black"
-        android:textSize="25sp"
-        android:hint="Enter Password"
-        android:id="@+id/editPW"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/editUN"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="150dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/ic_wave__up" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:textAllCaps="false"
-        android:padding="10dp"
-        android:textSize="20sp"
-        android:background="@color/purple_500"
-        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-        android:text="Login"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/editPW"
+    <RelativeLayout
+        android:id="@+id/rel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnCreateAccount"
-        android:background="@android:color/holo_red_dark"
-        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        android:text="Create Account"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/btnLogin"
+        <EditText
+            android:id="@+id/editUN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:hint="Enter Username"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLines="1"
+            android:minLines="1"
+            android:padding="5dp"
+            android:textColorHint="@android:color/black"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/editPW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editUN"
+            android:layout_marginTop="10dp"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:maxLines="1"
+            android:minLines="1"
+            android:padding="5dp"
+            android:textColorHint="@android:color/black"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editPW"
+            android:layout_marginTop="10dp"
+            android:background="#00cba9"
+            android:padding="10dp"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnCreateAccount"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnLogin"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="Create Account"
+            android:textAllCaps="false"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitEnd"
+        android:src="@drawable/ic_wave_down" />
 </RelativeLayout>

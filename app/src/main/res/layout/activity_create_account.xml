@@ -121,16 +121,17 @@
                 android:textSize="20sp" />
 
             <Button
-                android:layout_marginTop="10dp"
                 android:id="@+id/btnCreateAccount"
                 style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editLN"
+                android:layout_marginTop="15dp"
                 android:background="@android:color/holo_blue_dark"
                 android:padding="10dp"
                 android:text="Create Account"
                 android:textAllCaps="false"
+                android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </RelativeLayout>
     </ScrollView>
