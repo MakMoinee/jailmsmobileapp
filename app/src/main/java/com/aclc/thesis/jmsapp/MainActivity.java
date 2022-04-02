@@ -12,8 +12,6 @@ import android.widget.Toast;
 import com.aclc.thesis.jmsapp.common.Constants;
 import com.aclc.thesis.jmsapp.parsers.UserParserImpl;
 import com.aclc.thesis.jmsapp.parsers.UserParserIntf;
-import com.aclc.thesis.jmsapp.preference.ConfigPrefImpl;
-import com.aclc.thesis.jmsapp.preference.ConfigPreference;
 import com.aclc.thesis.jmsapp.service.UserService;
 import com.aclc.thesis.jmsapp.service.UserServiceImpl;
 
@@ -53,14 +51,14 @@ public class MainActivity extends AppCompatActivity {
                     dialog.show();
                 } else {
 
-                    String data = userService.retrieveUser(MainActivity.this);
-                    Boolean isValid = userParser.parseUser(data);
-                    if (isValid) {
+//                    String data = userService.retrieveUser(MainActivity.this);
+//                    Boolean isValid = userParser.parseUser(data);
+//                    if (isValid) {
                         Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
                         startActivity(intent);
-                    } else {
-                        Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
-                    }
+//                    } else {
+//                        Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
+//                    }
                 }
             }
         });

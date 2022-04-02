@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/ic_wave__up" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -11,18 +16,20 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/lblCreate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="65dp"
+                android:fontFamily="@font/poppins_semibold"
                 android:padding="10dp"
                 android:text="Create Your Account Now"
                 android:textColor="@color/purple_500"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -31,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lblCreate"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="Username"
                 android:inputType="text"
                 android:lines="1"
@@ -39,9 +47,10 @@
                 android:padding="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
+                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editPW"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,9 +64,10 @@
                 android:padding="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
+                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,9 +81,10 @@
                 android:padding="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
+                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editFN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,9 +98,10 @@
                 android:padding="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
+                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editMN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,9 +115,10 @@
                 android:padding="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
+                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editLN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,7 +131,7 @@
                 android:padding="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btnCreateAccount"
@@ -126,8 +139,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editLN"
-                android:layout_marginTop="15dp"
-                android:background="@android:color/holo_blue_dark"
+                android:layout_marginTop="25dp"
+                android:background="#00cba9"
                 android:padding="10dp"
                 android:text="Create Account"
                 android:textAllCaps="false"
@@ -136,4 +149,10 @@
         </RelativeLayout>
     </ScrollView>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitEnd"
+        android:src="@drawable/ic_wave_down" />
 </RelativeLayout>

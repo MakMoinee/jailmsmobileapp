@@ -24,12 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:fontFamily="@font/poppins_regular"
             android:hint="Enter Username"
             android:inputType="text"
             android:lines="1"
             android:maxLines="1"
             android:minLines="1"
             android:padding="5dp"
+            android:textCursorDrawable="@drawable/grey_cursor_color"
             android:textColorHint="@android:color/black"
             android:textSize="25sp" />
 
@@ -39,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/editUN"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
             android:hint="Enter Password"
             android:inputType="textPassword"
             android:lines="1"
@@ -46,20 +49,35 @@
             android:minLines="1"
             android:padding="5dp"
             android:textColorHint="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textCursorDrawable="@drawable/grey_cursor_color"
+            app:drawable_hide="@drawable/hide1"
+            app:drawable_show="@drawable/show" />
+
+        <TextView
+            android:id="@+id/lblForgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editPW"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Forgot Password?"
+            android:textColor="#d5d5d5"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/btnLogin"
             style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editPW"
+            android:layout_below="@+id/lblForgot"
             android:layout_marginTop="10dp"
             android:background="#00cba9"
+            android:fontFamily="@font/poppins_semibold"
             android:padding="10dp"
             android:text="Login"
             android:textAllCaps="false"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/btnCreateAccount"
@@ -69,9 +87,10 @@
             android:layout_below="@+id/btnLogin"
             android:layout_marginTop="10dp"
             android:background="@android:color/holo_red_dark"
+            android:fontFamily="@font/poppins_semibold"
             android:text="Create Account"
             android:textAllCaps="false"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
     </RelativeLayout>
 
     <ImageView
