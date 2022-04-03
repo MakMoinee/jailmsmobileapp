@@ -1,5 +1,6 @@
 package com.aclc.thesis.jmsapp.service;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,32 +14,25 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class UserServiceImpl implements UserService {
-    Boolean isResponded = false;
-    String response = "";
+
 
     @Override
-    public String retrieveUser(Context mContext) {
-        isResponded = false;
+    public void retrieveUser(Context mContext, ProgressDialog progressDialog, RestRequest restRequest) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.FULL_URL + Constants.LOGIN_PATH, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                isResponded = true;
-                response = response;
+                restRequest.onSuccess(response, progressDialog);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                isResponded = true;
                 Log.e("retrieveUsersList()", error.toString());
                 Toast.makeText(mContext, "Unexpected Error Occurred", Toast.LENGTH_SHORT).show();
+                restRequest.onError(error, progressDialog);
             }
         });
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(stringRequest);
 
-        while (!isResponded) {
-            Log.i("retrieveUsersList()", "still waiting for response");
-        }
-        return response;
     }
 }

@@ -1,6 +1,7 @@
 package com.aclc.thesis.jmsapp;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +13,10 @@ import android.widget.Toast;
 import com.aclc.thesis.jmsapp.common.Constants;
 import com.aclc.thesis.jmsapp.parsers.UserParserImpl;
 import com.aclc.thesis.jmsapp.parsers.UserParserIntf;
+import com.aclc.thesis.jmsapp.service.RestRequest;
 import com.aclc.thesis.jmsapp.service.UserService;
 import com.aclc.thesis.jmsapp.service.UserServiceImpl;
+import com.android.volley.VolleyError;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private UserService userService = new UserServiceImpl();
     private UserParserIntf userParser = new UserParserImpl();
     private AlertDialog dialog;
+    private ProgressDialog processDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +54,28 @@ public class MainActivity extends AppCompatActivity {
                     dialog = mBuilder.create();
                     dialog.show();
                 } else {
+                    processDialog.show();
+                    userService.retrieveUser(MainActivity.this, processDialog, new RestRequest() {
+                        @Override
+                        public void onSuccess(String response, ProgressDialog progressDialog) {
+                            Boolean isValid = userParser.parseUser(response);
+                            if (isValid) {
+                                processDialog.dismiss();
+                                Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                processDialog.dismiss();
+                                Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-//                    String data = userService.retrieveUser(MainActivity.this);
-//                    Boolean isValid = userParser.parseUser(data);
-//                    if (isValid) {
-                        Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
-                        startActivity(intent);
-//                    } else {
-//                        Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
-//                    }
+                        @Override
+                        public void onError(VolleyError e, ProgressDialog progressDialog) {
+                            processDialog.dismiss();
+                        }
+                    });
+
                 }
             }
         });
@@ -100,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
         editPW = findViewById(R.id.editPW);
         btnLogin = findViewById(R.id.btnLogin);
         btnCreateAccount = findViewById(R.id.btnCreateAccount);
+        processDialog = new ProgressDialog(MainActivity.this);
+        processDialog.setMessage("Logging in ...");
+        processDialog.setCancelable(false);
 
         Constants.setIp(MainActivity.this);
     }
