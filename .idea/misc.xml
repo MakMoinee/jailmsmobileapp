@@ -4,14 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/drawable/ic_wave__up.xml" value="0.1595" />
-        <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/activity_create_account.xml" value="0.33" />
+        <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/activity_create_account.xml" value="0.25" />
         <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/activity_main_form.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/app_bar_main_form.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/content_main_form.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/dialog_login.xml" value="0.19947916666666668" />
+        <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/fragment_qr_generator.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/layout/nav_header_main_form.xml" value="0.25" />
+        <entry key="..\:/Android Projects/jailmsmobileapp/app/src/main/res/menu/activity_main_drawer.xml" value="0.20416666666666666" />
         <entry key="..\:/JmsApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
       </map>
     </option>

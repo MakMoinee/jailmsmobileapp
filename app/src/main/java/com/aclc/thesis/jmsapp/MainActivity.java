@@ -11,12 +11,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.aclc.thesis.jmsapp.common.Constants;
+import com.aclc.thesis.jmsapp.models.Users;
 import com.aclc.thesis.jmsapp.parsers.UserParserImpl;
 import com.aclc.thesis.jmsapp.parsers.UserParserIntf;
 import com.aclc.thesis.jmsapp.service.RestRequest;
 import com.aclc.thesis.jmsapp.service.UserService;
 import com.aclc.thesis.jmsapp.service.UserServiceImpl;
 import com.android.volley.VolleyError;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     userService.retrieveUser(MainActivity.this, processDialog, new RestRequest() {
                         @Override
                         public void onSuccess(String response, ProgressDialog progressDialog) {
-                            Boolean isValid = userParser.parseUser(response);
-                            if (isValid) {
+                            List<Users> userLogin = userParser.parseUsersList(response);
+                            if (userLogin.size() > 0) {
                                 processDialog.dismiss();
                                 Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
                                 startActivity(intent);

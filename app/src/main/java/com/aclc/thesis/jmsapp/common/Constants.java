@@ -8,10 +8,10 @@ import com.aclc.thesis.jmsapp.preference.ConfigPrefImpl;
 import com.aclc.thesis.jmsapp.preference.ConfigPreference;
 
 public class Constants {
-    public static String IP_ADDRESS = "192.168.1.1";
+    public static String IP_ADDRESS = "192.168.1.3";
     public static String PROTOCOL = "http:";
     public static String FULL_URL = PROTOCOL + IP_ADDRESS;
-    public static String LOGIN_PATH = "/get/jms/login";
+    public static String LOGIN_PATH = "/get/jms/users";
     public static ConfigPreference config = new ConfigPrefImpl();
 
     public static Boolean setIp(Context mContext) {
