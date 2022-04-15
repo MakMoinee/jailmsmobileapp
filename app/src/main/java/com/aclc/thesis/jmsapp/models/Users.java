@@ -3,7 +3,7 @@ package com.aclc.thesis.jmsapp.models;
 public class Users {
     int userID;
     String userName;
-    String password;
+    String userPassword;
     int userType;
 
     public int getUserID() {
@@ -23,11 +23,11 @@ public class Users {
     }
 
     public String getPassword() {
-        return password;
+        return userPassword;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.userPassword = password;
     }
 
     public int getUserType() {

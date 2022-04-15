@@ -19,11 +19,17 @@
         android:layout_marginTop="80dp"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/applogo" />
         <EditText
             android:id="@+id/editUN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="250dp"
             android:fontFamily="@font/poppins_regular"
             android:hint="Enter Username"
             android:inputType="text"

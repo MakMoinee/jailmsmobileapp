@@ -11,15 +11,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.aclc.thesis.jmsapp.common.Constants;
+import com.aclc.thesis.jmsapp.models.Routes;
 import com.aclc.thesis.jmsapp.models.Users;
+import com.aclc.thesis.jmsapp.parsers.RoutesParserImpl;
+import com.aclc.thesis.jmsapp.parsers.RoutesParserIntf;
 import com.aclc.thesis.jmsapp.parsers.UserParserImpl;
 import com.aclc.thesis.jmsapp.parsers.UserParserIntf;
+import com.aclc.thesis.jmsapp.preference.UserPreference;
+import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
 import com.aclc.thesis.jmsapp.service.RestRequest;
+import com.aclc.thesis.jmsapp.service.SimpleRequest;
 import com.aclc.thesis.jmsapp.service.UserService;
 import com.aclc.thesis.jmsapp.service.UserServiceImpl;
 import com.android.volley.VolleyError;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin, btnCreateAccount, btnProceed;
     private UserService userService = new UserServiceImpl();
     private UserParserIntf userParser = new UserParserImpl();
+    private RoutesParserIntf routesParser = new RoutesParserImpl();
+    private UserPreference userPreference;
+    private List<Routes> routesList = new ArrayList<>();
     private AlertDialog dialog;
     private ProgressDialog processDialog;
 
@@ -36,7 +48,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setViews();
+        getRoutes();
         setListeners();
+    }
+
+    private void getRoutes() {
+        SimpleRequest simpleRequest = new SimpleRequest();
+        processDialog.setMessage("Setting up ...");
+        processDialog.show();
+        processDialog.setCancelable(false);
+
+        simpleRequest.SendRequest(MainActivity.this, processDialog, new RestRequest() {
+            @Override
+            public void onSuccess(String response, ProgressDialog progressDialog) {
+                routesList = routesParser.getRouteList(MainActivity.this, response);
+                Map<String, String> routeMap = new HashMap<>();
+                for (int i = 0; i < routesList.size(); i++) {
+                    Routes routes = routesList.get(i);
+                    routeMap.put(routes.getRouteName(), routes.getRouteValue());
+                }
+
+                Constants.routeMap = routeMap;
+                processDialog.dismiss();
+                processDialog.setMessage("Logging in ...");
+            }
+
+            @Override
+            public void onError(VolleyError e, ProgressDialog progressDialog) {
+                processDialog.dismiss();
+                processDialog.setMessage("Logging in ...");
+            }
+        });
     }
 
     private void setListeners() {
@@ -58,11 +100,14 @@ public class MainActivity extends AppCompatActivity {
                     dialog.show();
                 } else {
                     processDialog.show();
-                    userService.retrieveUser(MainActivity.this, processDialog, new RestRequest() {
+                    Users users = new Users();
+                    users.setUserName(editUN.getText().toString());
+                    users.setPassword(editPW.getText().toString());
+                    userService.logUser(MainActivity.this, users, processDialog, new RestRequest() {
                         @Override
                         public void onSuccess(String response, ProgressDialog progressDialog) {
-                            List<Users> userLogin = userParser.parseUsersList(response);
-                            if (userLogin.size() > 0) {
+                            Users userLogin = userParser.parseUser(response);
+                            if (userLogin != null) {
                                 processDialog.dismiss();
                                 Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
                                 startActivity(intent);
@@ -76,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onError(VolleyError e, ProgressDialog progressDialog) {
                             processDialog.dismiss();
+                            Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -105,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                     editIP.setText("");
                     clearFields();
                     dialog.dismiss();
+                    getRoutes();
                 }
             }
         });
@@ -116,6 +163,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setViews() {
+        userPreference = new UserPreferenceImpl(MainActivity.this);
+        int id = userPreference.getUserID();
+        int type = userPreference.getUserType();
+        if (id != 0 && type != 0) {
+            Constants.setIp(MainActivity.this);
+            Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
+            startActivity(intent);
+            finish();
+        }
         editUN = findViewById(R.id.editUN);
         editPW = findViewById(R.id.editPW);
         btnLogin = findViewById(R.id.btnLogin);
@@ -123,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
         processDialog = new ProgressDialog(MainActivity.this);
         processDialog.setMessage("Logging in ...");
         processDialog.setCancelable(false);
-
         Constants.setIp(MainActivity.this);
+
     }
 
 

@@ -10,7 +10,7 @@ public interface UserPreference {
      * @param mContext - context of the activity
      *                 - Sets the user in preference
      */
-    void setUsers(Users users, Context mContext);
+    void setUsers(Users users);
 
     /**
      * @return - retrieves the userID from the user stored in preference.

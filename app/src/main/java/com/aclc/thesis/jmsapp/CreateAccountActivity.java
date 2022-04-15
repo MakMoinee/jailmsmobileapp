@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.aclc.thesis.jmsapp.common.Constants;
+import com.aclc.thesis.jmsapp.models.Users;
+import com.aclc.thesis.jmsapp.models.Visitor;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -36,7 +38,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                     Toast.makeText(CreateAccountActivity.this, "Please Don't Leave Empty Fields", Toast.LENGTH_SHORT).show();
                 } else {
                     if (editConfirm.getText().toString().equals(editPW.getText().toString())) {
+                        Users users = new Users();
+                        users.setPassword(editPW.getText().toString());
+                        users.setUserName(editUN.getText().toString());
+                        users.setUserType(2);
 
+                        Visitor visitor = new Visitor();
                     } else {
                         Toast.makeText(CreateAccountActivity.this, "Password Doesn't Match", Toast.LENGTH_SHORT).show();
                     }
