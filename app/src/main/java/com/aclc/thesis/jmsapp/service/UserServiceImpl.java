@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("retrieveUsersList()", error.toString());
-//                Toast.makeText(mContext, "Unexpected Error Occurred", Toast.LENGTH_SHORT).show();
                 Toast.makeText(mContext, "UserServiceImpl -> " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 restRequest.onError(error, progressDialog);
             }

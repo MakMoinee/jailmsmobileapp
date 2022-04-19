@@ -39,7 +39,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 } else {
                     if (editConfirm.getText().toString().equals(editPW.getText().toString())) {
                         Users users = new Users();
-                        users.setPassword(editPW.getText().toString());
+                        users.setUserPassword(editPW.getText().toString());
                         users.setUserName(editUN.getText().toString());
                         users.setUserType(2);
 

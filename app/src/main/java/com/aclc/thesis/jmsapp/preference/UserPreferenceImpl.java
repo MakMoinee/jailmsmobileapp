@@ -5,10 +5,10 @@ import android.content.SharedPreferences;
 
 import com.aclc.thesis.jmsapp.models.Users;
 
-public class UserPreferenceImpl implements UserPreference{
+public class UserPreferenceImpl implements UserPreference {
 
-    private SharedPreferences pref;
-    private Context mContext;
+    SharedPreferences pref;
+    Context mContext;
 
     public UserPreferenceImpl(Context mContext) {
         this.mContext = mContext;
@@ -19,8 +19,8 @@ public class UserPreferenceImpl implements UserPreference{
         pref = mContext.getSharedPreferences("user", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt("userID", users.getUserID());
-        editor.putString("userName",users.getUserName());
-        editor.putString("userPassword",users.getPassword());
+        editor.putString("userName", users.getUserName());
+        editor.putString("userPassword", users.getUserPassword());
         editor.putInt("userType", users.getUserType());
         editor.apply();
         editor.commit();
@@ -29,12 +29,12 @@ public class UserPreferenceImpl implements UserPreference{
     @Override
     public int getUserID() {
         pref = mContext.getSharedPreferences("user", Context.MODE_PRIVATE);
-        return pref.getInt("userID",0);
+        return pref.getInt("userID", 0);
     }
 
     @Override
     public int getUserType() {
         pref = mContext.getSharedPreferences("user", Context.MODE_PRIVATE);
-        return pref.getInt("userType",0);
+        return pref.getInt("userType", 0);
     }
 }

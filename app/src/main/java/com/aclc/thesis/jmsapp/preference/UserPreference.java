@@ -6,9 +6,8 @@ import com.aclc.thesis.jmsapp.models.Users;
 
 public interface UserPreference {
     /**
-     * @param users    - user to be set in preference
-     * @param mContext - context of the activity
-     *                 - Sets the user in preference
+     * @param users - user to be set in preference
+     *              - Sets the user in preference
      */
     void setUsers(Users users);
 

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-public class Routes {
-    private String routeName;
-    private String routeValue;
+public class Inmates {
+    String name;
 }

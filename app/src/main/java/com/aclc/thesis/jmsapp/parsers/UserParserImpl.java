@@ -26,7 +26,7 @@ public class UserParserImpl implements UserParserIntf {
             JSONObject obj = new JSONObject(response);
             user.setUserID(obj.getInt("userID"));
             user.setUserName(obj.getString("userName"));
-            user.setPassword(obj.getString("userPassword"));
+            user.setUserPassword(obj.getString("userPassword"));
             user.setUserType(obj.getInt("userType"));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -45,7 +45,7 @@ public class UserParserImpl implements UserParserIntf {
                 Users user = new Users();
                 user.setUserID(obj.getInt("userID"));
                 user.setUserName(obj.getString("userName"));
-                user.setPassword(obj.getString("userPassword"));
+                user.setUserPassword(obj.getString("userPassword"));
                 user.setUserType(obj.getInt("userType"));
                 usersList.add(user);
             }

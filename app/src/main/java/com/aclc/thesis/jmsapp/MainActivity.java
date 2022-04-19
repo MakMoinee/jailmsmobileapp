@@ -102,13 +102,14 @@ public class MainActivity extends AppCompatActivity {
                     processDialog.show();
                     Users users = new Users();
                     users.setUserName(editUN.getText().toString());
-                    users.setPassword(editPW.getText().toString());
+                    users.setUserPassword(editPW.getText().toString());
                     userService.logUser(MainActivity.this, users, processDialog, new RestRequest() {
                         @Override
                         public void onSuccess(String response, ProgressDialog progressDialog) {
                             Users userLogin = userParser.parseUser(response);
                             if (userLogin != null) {
                                 processDialog.dismiss();
+                                userPreference.setUsers(userLogin);
                                 Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onError(VolleyError e, ProgressDialog progressDialog) {
                             processDialog.dismiss();
-                            Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Login attempt failed. Please contact system administrator", Toast.LENGTH_SHORT).show();
                         }
                     });
 
