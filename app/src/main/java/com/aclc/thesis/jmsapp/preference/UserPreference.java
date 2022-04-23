@@ -20,4 +20,6 @@ public interface UserPreference {
      * @return - retrieves the userType from the user stored in preference.
      */
     int getUserType();
+
+    Users getUsers();
 }

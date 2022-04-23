@@ -10,7 +10,7 @@ public class QRGeneratorViewModel extends ViewModel {
 
     public QRGeneratorViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is qr fragment");
     }
 
     public LiveData<String> getText() {

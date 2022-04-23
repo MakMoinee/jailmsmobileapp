@@ -37,4 +37,14 @@ public class UserPreferenceImpl implements UserPreference {
         pref = mContext.getSharedPreferences("user", Context.MODE_PRIVATE);
         return pref.getInt("userType", 0);
     }
+
+    @Override
+    public Users getUsers() {
+        pref = mContext.getSharedPreferences("user", Context.MODE_PRIVATE);
+        Users users = new Users();
+        users.setUserName(pref.getString("userName", ""));
+        users.setUserID(pref.getInt("userID", 0));
+
+        return users;
+    }
 }
