@@ -115,13 +115,19 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(String response, ProgressDialog progressDialog) {
                             Users userLogin = userParser.parseUser(response);
+                            processDialog.dismiss();
                             if (userLogin != null) {
-                                processDialog.dismiss();
                                 userPreference.setUsers(userLogin);
-                                getData();
+                                if (userLogin.getUserID() == 1) {
+                                    Intent intent = new Intent(MainActivity.this, AdminFormActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    getData();
+                                }
+
 
                             } else {
-                                processDialog.dismiss();
                                 Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -176,9 +182,15 @@ public class MainActivity extends AppCompatActivity {
         int type = userPreference.getUserType();
         if (id != 0 && type != 0) {
             Constants.setIp(MainActivity.this);
-            Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
-            startActivity(intent);
-            finish();
+            if (type == 1) {
+                Intent intent = new Intent(MainActivity.this, AdminFormActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
         editUN = findViewById(R.id.editUN);
         editPW = findViewById(R.id.editPW);

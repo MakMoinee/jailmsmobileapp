@@ -16,6 +16,11 @@
         android:theme="@style/Theme.JmsApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AdminFormActivity"
+            android:exported="false"
+            android:label="@string/title_activity_admin_form"
+            android:theme="@style/Theme.JmsApp.NoActionBar" />
+        <activity
             android:name=".MainFormActivity"
             android:exported="false"
             android:label="@string/title_activity_main_form"

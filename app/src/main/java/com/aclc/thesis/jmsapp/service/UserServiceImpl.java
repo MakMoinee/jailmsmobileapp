@@ -11,6 +11,7 @@ import com.aclc.thesis.jmsapp.models.Users;
 import com.aclc.thesis.jmsapp.models.Visitor;
 import com.aclc.thesis.jmsapp.utility.LocalUtil;
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -48,6 +49,10 @@ public class UserServiceImpl implements UserService {
                 restRequest.onError(error, progressDialog);
             }
         });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(stringRequest);
 
@@ -85,6 +90,10 @@ public class UserServiceImpl implements UserService {
                 return mData.getBytes();
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(stringRequest);
     }
@@ -122,7 +131,10 @@ public class UserServiceImpl implements UserService {
                 return Constants.CONTENT_BODY;
             }
         };
-
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(stringRequest);
     }
@@ -162,7 +174,10 @@ public class UserServiceImpl implements UserService {
                 return finalReq.getBytes();
             }
         };
-
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(stringRequest);
     }
