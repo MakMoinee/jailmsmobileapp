@@ -13,12 +13,17 @@ import android.widget.Toast;
 import com.aclc.thesis.jmsapp.common.Constants;
 import com.aclc.thesis.jmsapp.models.Routes;
 import com.aclc.thesis.jmsapp.models.Users;
+import com.aclc.thesis.jmsapp.models.Visitor;
 import com.aclc.thesis.jmsapp.parsers.RoutesParserImpl;
 import com.aclc.thesis.jmsapp.parsers.RoutesParserIntf;
 import com.aclc.thesis.jmsapp.parsers.UserParserImpl;
 import com.aclc.thesis.jmsapp.parsers.UserParserIntf;
+import com.aclc.thesis.jmsapp.parsers.VisitorParser;
+import com.aclc.thesis.jmsapp.parsers.VisitorParserImpl;
 import com.aclc.thesis.jmsapp.preference.UserPreference;
 import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
+import com.aclc.thesis.jmsapp.preference.VisitorPreference;
+import com.aclc.thesis.jmsapp.preference.VisitorPreferenceImpl;
 import com.aclc.thesis.jmsapp.service.RestRequest;
 import com.aclc.thesis.jmsapp.service.SimpleRequest;
 import com.aclc.thesis.jmsapp.service.UserService;
@@ -41,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Routes> routesList = new ArrayList<>();
     private AlertDialog dialog;
     private ProgressDialog processDialog;
+    private VisitorParser visitorParser;
+    private VisitorPreference visitorPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setViews();
         getRoutes();
         setListeners();
+        getData();
     }
 
     private void getRoutes() {
@@ -110,9 +118,8 @@ public class MainActivity extends AppCompatActivity {
                             if (userLogin != null) {
                                 processDialog.dismiss();
                                 userPreference.setUsers(userLogin);
-                                Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
-                                startActivity(intent);
-                                finish();
+                                getData();
+
                             } else {
                                 processDialog.dismiss();
                                 Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
@@ -188,5 +195,41 @@ public class MainActivity extends AppCompatActivity {
     private void clearFields() {
         editUN.setText("");
         editPW.setText("");
+    }
+
+    private void getData() {
+        userPreference = new UserPreferenceImpl(MainActivity.this);
+        int userid = userPreference.getUserID();
+        if (userid == 0) return;
+        SimpleRequest simpleRequest = new SimpleRequest();
+        String path = Constants.routeMap.get("GetVisitorByUserID");
+
+        String fullPath = path + "?uid=" + Integer.toString(userid);
+
+        simpleRequest.SendSimpleGet(MainActivity.this, fullPath, null, new RestRequest() {
+            @Override
+            public void onSuccess(String response, ProgressDialog progressDialog) {
+                visitorParser = new VisitorParserImpl();
+                Visitor visitor = visitorParser.getVisitor(MainActivity.this, response);
+                if (visitor != null) {
+                    visitorPreference = new VisitorPreferenceImpl(MainActivity.this);
+                    visitorPreference.storeVisitor(visitor);
+                    Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onError(VolleyError e, ProgressDialog progressDialog) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
     }
 }

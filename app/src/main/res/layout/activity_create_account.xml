@@ -146,13 +146,15 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
+            <ImageView
+                android:layout_below="@+id/btnCreateAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/ic_wave_down" />
         </RelativeLayout>
     </ScrollView>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:scaleType="fitEnd"
-        android:src="@drawable/ic_wave_down" />
+
 </RelativeLayout>

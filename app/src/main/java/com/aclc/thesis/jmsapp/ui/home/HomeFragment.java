@@ -1,36 +1,33 @@
 package com.aclc.thesis.jmsapp.ui.home;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.arch.lifecycle.ViewModelProvider;
 
-import com.aclc.thesis.jmsapp.databinding.FragmentHomeBinding;
+import com.aclc.thesis.jmsapp.R;
 
+@SuppressLint("ValidFragment")
 public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private Context mContext;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public HomeFragment(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(HomeViewModel.class);
+        View mView = LayoutInflater.from(mContext).inflate(R.layout.fragment_home, container, false);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        return mView;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }

@@ -1,5 +1,6 @@
 package com.aclc.thesis.jmsapp;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,21 +17,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.navigation.ui.AppBarConfiguration;
-
-import com.aclc.thesis.jmsapp.databinding.ActivityMainFormBinding;
+import com.aclc.thesis.jmsapp.common.Constants;
 import com.aclc.thesis.jmsapp.models.Users;
+import com.aclc.thesis.jmsapp.models.Visitor;
+import com.aclc.thesis.jmsapp.parsers.VisitorParser;
+import com.aclc.thesis.jmsapp.parsers.VisitorParserImpl;
 import com.aclc.thesis.jmsapp.preference.UserPreference;
 import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
+import com.aclc.thesis.jmsapp.preference.VisitorPreference;
+import com.aclc.thesis.jmsapp.preference.VisitorPreferenceImpl;
+import com.aclc.thesis.jmsapp.service.RestRequest;
+import com.aclc.thesis.jmsapp.service.SimpleRequest;
 import com.aclc.thesis.jmsapp.ui.home.HomeFragment;
 import com.aclc.thesis.jmsapp.ui.qr.QRGeneratorFragment;
+import com.android.volley.VolleyError;
 
 public class MainFormActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainFormBinding binding;
-    private Fragment homeFragment = new HomeFragment();
-    private Fragment qrFragment = new QRGeneratorFragment();
+
+    private Fragment homeFragment;
+    private Fragment qrFragment;
     private UserPreference userPreference;
     private FragmentManager fm;
     private FragmentTransaction ft;
@@ -38,6 +44,9 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private TextView txtUsername;
+    private VisitorParser visitorParser;
+    private VisitorPreference visitorPreference;
+    private Toolbar toolbar;
 
 
     @Override
@@ -45,12 +54,14 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_main_form);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("JMS");
         setSupportActionBar(toolbar);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
         setUser(headerView);
+        homeFragment = new HomeFragment(MainFormActivity.this);
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.replace(R.id.frame, homeFragment, null);
@@ -61,18 +72,12 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        getData();
+    }
 
-//        DrawerLayout drawer = binding.drawerLayout;
-//        NavigationView navigationView = binding.navView;
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home, R.id.nav_qr, R.id.nav_logout)
-//                .setDrawerLayout(drawer)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_form);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
+    private void getData() {
+        visitorPreference = new VisitorPreferenceImpl(MainFormActivity.this);
+        txtUsername.setText(visitorPreference.getFullName());
     }
 
     private void setUser(View headerView) {
@@ -87,21 +92,23 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
-                homeFragment = new HomeFragment();
+                homeFragment = new HomeFragment(MainFormActivity.this);
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.frame, homeFragment, null);
                 ft.commit();
                 navigationView.setCheckedItem(R.id.nav_home);
+                toolbar.setTitle("JMS");
                 drawer.closeDrawer(navigationView);
                 return true;
             case R.id.nav_qr:
-                qrFragment = new QRGeneratorFragment();
+                qrFragment = new QRGeneratorFragment(MainFormActivity.this);
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.frame, qrFragment, null);
                 ft.commit();
                 navigationView.setCheckedItem(R.id.nav_qr);
+                toolbar.setTitle("QR Code");
                 drawer.closeDrawer(navigationView);
                 return true;
             case R.id.nav_logout:
@@ -130,5 +137,16 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
                 return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

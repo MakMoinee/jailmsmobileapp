@@ -1,5 +1,6 @@
 package com.aclc.thesis.jmsapp;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,11 +11,17 @@ import android.widget.Toast;
 import com.aclc.thesis.jmsapp.common.Constants;
 import com.aclc.thesis.jmsapp.models.Users;
 import com.aclc.thesis.jmsapp.models.Visitor;
+import com.aclc.thesis.jmsapp.service.RestRequest;
+import com.aclc.thesis.jmsapp.service.UserService;
+import com.aclc.thesis.jmsapp.service.UserServiceImpl;
+import com.android.volley.VolleyError;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
     private EditText editUN, editPW, editConfirm, editFN, editMN, editLN;
     private Button btnCreate;
+    private ProgressDialog progressDialog;
+    private UserService userService = new UserServiceImpl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,26 @@ public class CreateAccountActivity extends AppCompatActivity {
                         users.setUserType(2);
 
                         Visitor visitor = new Visitor();
+                        visitor.setFirstName(editFN.getText().toString());
+                        visitor.setMiddleName(editMN.getText().toString());
+                        visitor.setLastName(editLN.getText().toString());
+                        progressDialog.show();
+                        btnCreate.setEnabled(false);
+                        userService.createUser(CreateAccountActivity.this, users, visitor, progressDialog, new RestRequest() {
+                            @Override
+                            public void onSuccess(String response, ProgressDialog progressDialog) {
+                                progressDialog.dismiss();
+                                btnCreate.setEnabled(true);
+                                Toast.makeText(CreateAccountActivity.this, response, Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onError(VolleyError e, ProgressDialog progressDialog) {
+                                progressDialog.dismiss();
+                                btnCreate.setEnabled(true);
+                                Toast.makeText(CreateAccountActivity.this, "Error ->" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } else {
                         Toast.makeText(CreateAccountActivity.this, "Password Doesn't Match", Toast.LENGTH_SHORT).show();
                     }
@@ -60,6 +87,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         editLN = findViewById(R.id.editLN);
         editMN = findViewById(R.id.editMN);
         btnCreate = findViewById(R.id.btnCreateAccount);
+        progressDialog = new ProgressDialog(CreateAccountActivity.this);
+        progressDialog.setMessage("Creating User ...");
 
         Constants.setIp(CreateAccountActivity.this);
     }
