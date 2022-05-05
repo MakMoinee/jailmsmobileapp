@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.aclc.thesis.jmsapp.models.Users;
 import com.aclc.thesis.jmsapp.preference.UserPreference;
@@ -34,6 +35,7 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
     private Toolbar toolbar;
     private UserPreference userPreference;
     private Fragment scanQRFragment;
+    private TextView txtLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +55,24 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
         ft.replace(R.id.frame, homeFragment, null);
         ft.commit();
         View headerView = navigationView.getHeaderView(0);
+        txtLabel = headerView.findViewById(R.id.txtLabel);
+        setAdmin();
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
     }
 
+    private void setAdmin() {
+        userPreference = new UserPreferenceImpl(AdminFormActivity.this);
+        Users users= userPreference.getUsers();
+        txtLabel.setText(users.getUserName());
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
-
             case R.id.nav_home:
                 homeFragment = new HomeFragment(AdminFormActivity.this);
                 fm = getSupportFragmentManager();

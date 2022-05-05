@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         setViews();
         getRoutes();
         setListeners();
-        getData();
     }
 
     private void getRoutes() {
@@ -118,7 +117,9 @@ public class MainActivity extends AppCompatActivity {
                             processDialog.dismiss();
                             if (userLogin != null) {
                                 userPreference.setUsers(userLogin);
-                                if (userLogin.getUserID() == 1) {
+                                int type = userLogin.getUserType();
+                                if (Integer.toString(type).equals("1")) {
+                                    Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(MainActivity.this, AdminFormActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -212,7 +213,8 @@ public class MainActivity extends AppCompatActivity {
     private void getData() {
         userPreference = new UserPreferenceImpl(MainActivity.this);
         int userid = userPreference.getUserID();
-        if (userid == 0) return;
+        int type = userPreference.getUserType();
+        if (userid == 0 || type == 1) return;
         SimpleRequest simpleRequest = new SimpleRequest();
         String path = Constants.routeMap.get("GetVisitorByUserID");
 
@@ -226,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 if (visitor != null) {
                     visitorPreference = new VisitorPreferenceImpl(MainActivity.this);
                     visitorPreference.storeVisitor(visitor);
+                    Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, MainFormActivity.class);
                     startActivity(intent);
                     finish();
@@ -242,6 +245,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getData();
     }
 }

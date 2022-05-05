@@ -23,6 +23,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:scaleType="fitEnd"
-            android:src="@drawable/ic_wave_down" />
+            android:src="@drawable/ic_admin_wave_down" />
     </RelativeLayout>
 </RelativeLayout>

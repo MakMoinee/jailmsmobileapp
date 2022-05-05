@@ -1,6 +1,5 @@
 package com.aclc.thesis.jmsapp;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,20 +17,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.aclc.thesis.jmsapp.common.Constants;
 import com.aclc.thesis.jmsapp.models.Users;
-import com.aclc.thesis.jmsapp.models.Visitor;
 import com.aclc.thesis.jmsapp.parsers.VisitorParser;
-import com.aclc.thesis.jmsapp.parsers.VisitorParserImpl;
 import com.aclc.thesis.jmsapp.preference.UserPreference;
 import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
 import com.aclc.thesis.jmsapp.preference.VisitorPreference;
 import com.aclc.thesis.jmsapp.preference.VisitorPreferenceImpl;
-import com.aclc.thesis.jmsapp.service.RestRequest;
-import com.aclc.thesis.jmsapp.service.SimpleRequest;
 import com.aclc.thesis.jmsapp.ui.home.HomeFragment;
+import com.aclc.thesis.jmsapp.ui.profile.ProfileFragment;
 import com.aclc.thesis.jmsapp.ui.qr.QRGeneratorFragment;
-import com.android.volley.VolleyError;
 
 public class MainFormActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,6 +40,7 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
     private ActionBarDrawerToggle toggle;
     private TextView txtUsername;
     private VisitorParser visitorParser;
+    private Fragment profileFragment;
     private VisitorPreference visitorPreference;
     private Toolbar toolbar;
 
@@ -100,6 +95,15 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
                 ft.commit();
                 navigationView.setCheckedItem(R.id.nav_home);
                 toolbar.setTitle("JMS");
+                break;
+            case R.id.nav_profile:
+                profileFragment = new ProfileFragment(MainFormActivity.this);
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.frame,profileFragment,null);
+                ft.commit();
+                navigationView.setCheckedItem(R.id.nav_profile);
+                toolbar.setTitle("Profile");
                 break;
             case R.id.nav_qr:
                 qrFragment = new QRGeneratorFragment(MainFormActivity.this);
