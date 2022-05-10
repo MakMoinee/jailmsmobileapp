@@ -22,6 +22,7 @@ import com.aclc.thesis.jmsapp.models.Users;
 import com.aclc.thesis.jmsapp.preference.UserPreference;
 import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
 import com.aclc.thesis.jmsapp.ui.home.HomeFragment;
+import com.aclc.thesis.jmsapp.ui.profile.ProfileFragment;
 import com.aclc.thesis.jmsapp.ui.scanqr.ScanQRFragment;
 
 public class AdminFormActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +36,7 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
     private Toolbar toolbar;
     private UserPreference userPreference;
     private Fragment scanQRFragment;
+    private Fragment profileFragment;
     private TextView txtLabel;
 
     @Override
@@ -65,7 +67,7 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
 
     private void setAdmin() {
         userPreference = new UserPreferenceImpl(AdminFormActivity.this);
-        Users users= userPreference.getUsers();
+        Users users = userPreference.getUsers();
         txtLabel.setText(users.getUserName());
     }
 
@@ -78,6 +80,13 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.frame, homeFragment, null);
+                ft.commit();
+                break;
+            case R.id.nav_profile:
+                profileFragment = new ProfileFragment(AdminFormActivity.this);
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.frame, profileFragment, null);
                 ft.commit();
                 break;
             case R.id.nav_qr:

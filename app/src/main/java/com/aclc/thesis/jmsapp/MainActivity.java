@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleRequest simpleRequest = new SimpleRequest();
         processDialog.setMessage("Setting up ...");
         processDialog.show();
-        processDialog.setCancelable(false);
+        processDialog.setCancelable(true);
 
         simpleRequest.SendRequest(MainActivity.this, processDialog, new RestRequest() {
             @Override
