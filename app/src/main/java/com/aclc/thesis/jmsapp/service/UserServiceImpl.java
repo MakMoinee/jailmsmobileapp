@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.aclc.thesis.jmsapp.common.Constants;
 import com.aclc.thesis.jmsapp.models.CreateRequest;
+import com.aclc.thesis.jmsapp.models.UserVisitor;
 import com.aclc.thesis.jmsapp.models.Users;
 import com.aclc.thesis.jmsapp.models.Visitor;
 import com.aclc.thesis.jmsapp.utility.LocalUtil;
@@ -178,6 +179,44 @@ public class UserServiceImpl implements UserService {
                 0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        queue.add(stringRequest);
+    }
+
+    @Override
+    public void forgotPass(Context mContext, UserVisitor userVisitor, ProgressDialog progressDialog, RestRequest mReq) {
+        boolean isConnected = LocalUtil.isNetworkConnected(mContext);
+        if (!isConnected) {
+            Toast.makeText(mContext, "Please make sure you are connected to internet", Toast.LENGTH_SHORT).show();
+            VolleyError e = new VolleyError("Not connected to internet");
+            mReq.onError(e, progressDialog);
+            return;
+        }
+
+        String path = Constants.routeMap.get("ForgotPassword");
+        String finalReq = new Gson().toJson(userVisitor);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.PROTOCOL + Constants.IP_ADDRESS + path, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                mReq.onSuccess(response, progressDialog);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mReq.onError(error, progressDialog);
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return Constants.CONTENT_BODY;
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                return finalReq.getBytes();
+            }
+        };
+
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(stringRequest);
     }

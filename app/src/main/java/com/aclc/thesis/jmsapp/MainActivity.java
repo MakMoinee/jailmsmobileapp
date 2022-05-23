@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aclc.thesis.jmsapp.common.Constants;
 import com.aclc.thesis.jmsapp.models.Routes;
+import com.aclc.thesis.jmsapp.models.UserVisitor;
 import com.aclc.thesis.jmsapp.models.Users;
 import com.aclc.thesis.jmsapp.models.Visitor;
 import com.aclc.thesis.jmsapp.parsers.RoutesParserImpl;
@@ -38,7 +40,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private EditText editUN, editPW, editIP;
-    private Button btnLogin, btnCreateAccount, btnProceed;
+    private EditText editForgotUN, editNewPass, editConfirmPass, editBirthPlace, editFN, editLN, editMN;
+    private Button btnLogin, btnCreateAccount, btnProceed, btnResetPassword;
     private UserService userService = new UserServiceImpl();
     private UserParserIntf userParser = new UserParserImpl();
     private RoutesParserIntf routesParser = new RoutesParserImpl();
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog processDialog;
     private VisitorParser visitorParser;
     private VisitorPreference visitorPreference;
+    private TextView lblForgot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +156,95 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        lblForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editUN.getText().toString().equals("")) {
+                    Toast.makeText(MainActivity.this, "Please fill the username first", Toast.LENGTH_SHORT).show();
+                } else {
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                    View mView = getLayoutInflater().inflate(R.layout.dialog_forgot_pass, null, false);
+                    initForgotPassView(mView);
+                    initForgotPassListener(mView);
+                    mBuilder.setView(mView);
+                    mBuilder.setCancelable(true);
+                    dialog = mBuilder.create();
+                    dialog.show();
+                }
+            }
+        });
+    }
+
+    private void clearForgotWidgets() {
+        editForgotUN.setText("");
+        editNewPass.setText("");
+        editConfirmPass.setText("");
+        editBirthPlace.setText("");
+        editFN.setText("");
+        editLN.setText("");
+        editMN.setText("");
+    }
+
+    private void initForgotPassListener(View mView) {
+        btnResetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editForgotUN.getText().toString().equals("")
+                        || editNewPass.getText().toString().equals("")
+                        || editConfirmPass.getText().toString().equals("")
+                        || editBirthPlace.getText().toString().equals("")
+                        || editFN.getText().toString().equals("")
+                        || editLN.getText().toString().equals("")
+                        || editMN.getText().toString().equals("")) {
+                    Toast.makeText(MainActivity.this, "Please Don't Leave Empty Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (editNewPass.getText().toString().equals(editConfirmPass.getText().toString())) {
+                        UserVisitor userVisitor = new UserVisitor();
+                        userVisitor.setUserName(editForgotUN.getText().toString());
+                        userVisitor.setUserPassword(editNewPass.getText().toString());
+                        userVisitor.setFirstName(editFN.getText().toString());
+                        userVisitor.setLastName(editLN.getText().toString());
+                        userVisitor.setMiddleName(editMN.getText().toString());
+                        userVisitor.setBirthPlace(editBirthPlace.getText().toString());
+
+                        processDialog = new ProgressDialog(MainActivity.this);
+                        processDialog.setMessage("Resetting Password ...");
+                        processDialog.show();
+
+                        userService.forgotPass(MainActivity.this, userVisitor, processDialog, new RestRequest() {
+                            @Override
+                            public void onSuccess(String response, ProgressDialog progressDialog) {
+                                progressDialog.dismiss();
+                                Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                                clearForgotWidgets();
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void onError(VolleyError e, ProgressDialog progressDialog) {
+                                progressDialog.dismiss();
+                                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(MainActivity.this, "Password Doesn't Match", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+    }
+
+    private void initForgotPassView(View mView) {
+        editForgotUN = mView.findViewById(R.id.editForgotUN);
+        editNewPass = mView.findViewById(R.id.editNewPass);
+        editConfirmPass = mView.findViewById(R.id.editConfirmPass);
+        editBirthPlace = mView.findViewById(R.id.editBirthPlace);
+        editFN = mView.findViewById(R.id.editFN);
+        editLN = mView.findViewById(R.id.editLN);
+        editMN = mView.findViewById(R.id.editMN);
+        btnResetPassword = mView.findViewById(R.id.btnResetPass);
+
     }
 
     private void initDialogListeners(View mView) {
@@ -197,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
         editPW = findViewById(R.id.editPW);
         btnLogin = findViewById(R.id.btnLogin);
         btnCreateAccount = findViewById(R.id.btnCreateAccount);
+        lblForgot = findViewById(R.id.lblForgot);
         processDialog = new ProgressDialog(MainActivity.this);
         processDialog.setMessage("Logging in ...");
         processDialog.setCancelable(false);

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/lblForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Forgot Password"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editForgotUN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblForgot"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Enter Username"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editNewPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editForgotUN"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Enter New Password"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editConfirmPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editNewPass"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editFN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editConfirm"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Enter FirstName"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editMN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editFN"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Enter MiddleName"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editLN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editMN"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Enter Last Name"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editBirthPlace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editLN"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Enter Birth Place"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnResetPass"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editBirthPlace"
+        android:layout_marginTop="20dp"
+        android:background="@color/teal_200"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Reset Password"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"/>
+</RelativeLayout>
