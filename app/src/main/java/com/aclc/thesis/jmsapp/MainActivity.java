@@ -208,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
                         userVisitor.setMiddleName(editMN.getText().toString());
                         userVisitor.setBirthPlace(editBirthPlace.getText().toString());
 
-                        processDialog = new ProgressDialog(MainActivity.this);
                         processDialog.setMessage("Resetting Password ...");
                         processDialog.show();
 
@@ -219,11 +218,13 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
                                 clearForgotWidgets();
                                 dialog.dismiss();
+                                processDialog.setMessage("Logging in ...");
                             }
 
                             @Override
                             public void onError(VolleyError e, ProgressDialog progressDialog) {
                                 progressDialog.dismiss();
+                                processDialog.setMessage("Logging in ...");
                                 Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
