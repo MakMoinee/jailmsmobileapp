@@ -13,6 +13,7 @@ public class Visitor {
     String address;
     String birthPlace;
     String birthDate;
+    String contactNumber;
     String lastModifiedDate;
     String createdDate;
 }

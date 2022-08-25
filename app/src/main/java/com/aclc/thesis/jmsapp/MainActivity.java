@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    getData();
+                                    getData(userLogin);
                                 }
 
 
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onError(VolleyError e, ProgressDialog progressDialog) {
                             processDialog.dismiss();
-                            Toast.makeText(MainActivity.this, "Login attempt failed. Please contact system administrator", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -305,10 +305,10 @@ public class MainActivity extends AppCompatActivity {
         editPW.setText("");
     }
 
-    private void getData() {
+    private void getData(Users userLogin) {
         userPreference = new UserPreferenceImpl(MainActivity.this);
-        int userid = userPreference.getUserID();
-        int type = userPreference.getUserType();
+        int userid = userLogin.getUserID();
+        int type = userLogin.getUserType();
         if (userid == 0 || type == 1) return;
         SimpleRequest simpleRequest = new SimpleRequest();
         String path = Constants.routeMap.get("GetVisitorByUserID");

@@ -6,4 +6,6 @@ public interface VisitorPreference {
     void storeVisitor(Visitor visitor);
 
     String getFullName();
+
+    Visitor getVisitor();
 }

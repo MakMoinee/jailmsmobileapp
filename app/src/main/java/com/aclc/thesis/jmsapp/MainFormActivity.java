@@ -38,7 +38,7 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
-    private TextView txtUsername;
+    private TextView txtUsername, txtContactNum;
     private VisitorParser visitorParser;
     private Fragment profileFragment;
     private VisitorPreference visitorPreference;
@@ -78,9 +78,13 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
 
     private void setUser(View headerView) {
         txtUsername = headerView.findViewById(R.id.Username);
+        txtContactNum = headerView.findViewById(R.id.txtContactNum);
         userPreference = new UserPreferenceImpl(MainFormActivity.this);
+        visitorPreference = new VisitorPreferenceImpl(MainFormActivity.this);
         Users users = userPreference.getUsers();
         txtUsername.setText(users.getUserName());
+        String contactNum = visitorPreference.getVisitor().getContactNumber() != null ? visitorPreference.getVisitor().getContactNumber() : "";
+        txtContactNum.setText(contactNum);
     }
 
 
@@ -100,7 +104,7 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
                 profileFragment = new ProfileFragment(MainFormActivity.this);
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
-                ft.replace(R.id.frame,profileFragment,null);
+                ft.replace(R.id.frame, profileFragment, null);
                 ft.commit();
                 navigationView.setCheckedItem(R.id.nav_profile);
                 toolbar.setTitle("Profile");

@@ -44,6 +44,7 @@ public class UserPreferenceImpl implements UserPreference {
         Users users = new Users();
         users.setUserName(pref.getString("userName", ""));
         users.setUserID(pref.getInt("userID", 0));
+        users.setUserType(pref.getInt("userType", 0));
 
         return users;
     }

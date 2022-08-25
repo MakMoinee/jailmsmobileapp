@@ -27,6 +27,7 @@ public class VisitorPreferenceImpl implements VisitorPreference {
         editor.putString("middleName", visitor.getMiddleName());
         editor.putString("birthPlace", visitor.getBirthPlace());
         editor.putString("birthDate", visitor.getBirthDate());
+        editor.putString("contactNumber", visitor.getContactNumber());
         editor.putString("lastModifiedDate", visitor.getLastModifiedDate());
         editor.putString("createdDate", visitor.getCreatedDate());
         editor.commit();
@@ -44,5 +45,18 @@ public class VisitorPreferenceImpl implements VisitorPreference {
             return fullName;
         }
         return "";
+    }
+
+    @Override
+    public Visitor getVisitor() {
+        pref = context.getSharedPreferences("visitor", Context.MODE_PRIVATE);
+        Visitor visitor = new Visitor();
+        visitor.setFirstName(pref.getString("firstName", ""));
+        visitor.setMiddleName(pref.getString("middleName", ""));
+        visitor.setLastName(pref.getString("lastName", ""));
+        visitor.setBirthPlace(pref.getString("birthPlace", ""));
+        visitor.setBirthDate(pref.getString("birthDate", ""));
+        visitor.setContactNumber(pref.getString("contactNumber", ""));
+        return visitor;
     }
 }

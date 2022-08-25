@@ -50,12 +50,12 @@
                 android:textSize="15sp" />
 
             <EditText
-                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editPW"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editUN"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:lines="1"
@@ -67,12 +67,12 @@
                 android:textSize="15sp" />
 
             <EditText
-                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editPW"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:lines="1"
@@ -84,12 +84,12 @@
                 android:textSize="15sp" />
 
             <EditText
-                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editFN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editConfirm"
                 android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="First Name"
                 android:inputType="text"
                 android:lines="1"
@@ -101,12 +101,12 @@
                 android:textSize="15sp" />
 
             <EditText
-                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editMN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editFN"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="Middle Name"
                 android:inputType="text"
                 android:lines="1"
@@ -118,11 +118,11 @@
                 android:textSize="15sp" />
 
             <EditText
-                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/editLN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editMN"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="Last Name"
                 android:inputType="text"
                 android:lines="1"
@@ -133,12 +133,155 @@
                 android:textColorHint="@android:color/black"
                 android:textSize="15sp" />
 
+            <TextView
+                android:id="@+id/lblAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editLN"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Address:"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editAddress"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/lblAddress"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="text"
+                android:lines="2"
+                android:maxLines="2"
+                android:minLines="2"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lblContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editAddress"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Contact Number:"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblContact"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="phone"
+                android:maxLength="13"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lblBPlace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editContact"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Birth Place:"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editBirthPlace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblBPlace"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="text"
+                android:lines="1"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lblBdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editBirthPlace"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Birth Date:"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/bdMonth"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblBdate"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="mm"
+                android:inputType="number"
+                android:lines="1"
+                android:maxLength="2"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/bdDay"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblBdate"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/bdMonth"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="dd"
+                android:inputType="number"
+                android:lines="1"
+                android:maxLength="2"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/bdYear"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblBdate"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/bdDay"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="yyyy"
+                android:maxLength="4"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:textSize="15sp" />
+
             <Button
                 android:id="@+id/btnCreateAccount"
                 style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editLN"
+                android:layout_below="@+id/bdMonth"
                 android:layout_marginTop="25dp"
                 android:background="#00cba9"
                 android:padding="10dp"
@@ -146,10 +289,11 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
+
             <ImageView
-                android:layout_below="@+id/btnCreateAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/btnCreateAccount"
                 android:layout_alignParentBottom="true"
                 android:scaleType="fitEnd"
                 android:src="@drawable/ic_wave_down" />

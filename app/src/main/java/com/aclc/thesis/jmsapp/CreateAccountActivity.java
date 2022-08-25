@@ -18,7 +18,8 @@ import com.android.volley.VolleyError;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    private EditText editUN, editPW, editConfirm, editFN, editMN, editLN;
+    private EditText editUN, editPW, editConfirm, editFN, editMN, editLN, editBirthPlace, editAddress, editContactNum;
+    private EditText editMonth, editDay, editYear;
     private Button btnCreate;
     private ProgressDialog progressDialog;
     private UserService userService = new UserServiceImpl();
@@ -41,7 +42,13 @@ public class CreateAccountActivity extends AppCompatActivity {
                         editConfirm.getText().toString().equals("") ||
                         editFN.getText().toString().equals("") ||
                         editMN.getText().toString().equals("") ||
-                        editLN.getText().toString().equals("")) {
+                        editLN.getText().toString().equals("") ||
+                        editContactNum.getText().toString().equals("") ||
+                        editAddress.getText().toString().equals("") ||
+                        editBirthPlace.getText().toString().equals("") ||
+                        editMonth.getText().toString().equals("") ||
+                        editDay.getText().toString().equals("") ||
+                        editYear.getText().toString().equals("")) {
                     Toast.makeText(CreateAccountActivity.this, "Please Don't Leave Empty Fields", Toast.LENGTH_SHORT).show();
                 } else {
                     if (editConfirm.getText().toString().equals(editPW.getText().toString())) {
@@ -54,6 +61,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                         visitor.setFirstName(editFN.getText().toString());
                         visitor.setMiddleName(editMN.getText().toString());
                         visitor.setLastName(editLN.getText().toString());
+                        visitor.setBirthPlace(editBirthPlace.getText().toString());
+                        String bdate = editYear.getText().toString() + "-" + editMonth.getText().toString() + "-" + editDay.getText().toString();
+                        visitor.setBirthDate(bdate);
+                        visitor.setAddress(editAddress.getText().toString());
+                        visitor.setContactNumber(editContactNum.getText().toString());
                         progressDialog.show();
                         btnCreate.setEnabled(false);
                         userService.createUser(CreateAccountActivity.this, users, visitor, progressDialog, new RestRequest() {
@@ -62,6 +74,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 btnCreate.setEnabled(true);
                                 Toast.makeText(CreateAccountActivity.this, response, Toast.LENGTH_SHORT).show();
+                                clearFields();
+                                finish();
                             }
 
                             @Override
@@ -87,6 +101,12 @@ public class CreateAccountActivity extends AppCompatActivity {
         editLN = findViewById(R.id.editLN);
         editMN = findViewById(R.id.editMN);
         btnCreate = findViewById(R.id.btnCreateAccount);
+        editBirthPlace = findViewById(R.id.editBirthPlace);
+        editAddress = findViewById(R.id.editAddress);
+        editContactNum = findViewById(R.id.editContact);
+        editMonth = findViewById(R.id.bdMonth);
+        editDay = findViewById(R.id.bdDay);
+        editYear = findViewById(R.id.bdYear);
         progressDialog = new ProgressDialog(CreateAccountActivity.this);
         progressDialog.setMessage("Creating User ...");
 
@@ -96,6 +116,22 @@ public class CreateAccountActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        clearFields();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    private void clearFields() {
+        editUN.setText("");
+        editPW.setText("");
+        editConfirm.setText("");
+        editFN.setText("");
+        editMN.setText("");
+        editLN.setText("");
+        editContactNum.setText("");
+        editAddress.setText("");
+        editBirthPlace.setText("");
+        editMonth.setText("");
+        editDay.setText("");
+        editYear.setText("");
     }
 }
