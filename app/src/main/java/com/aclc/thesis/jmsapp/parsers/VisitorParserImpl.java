@@ -25,6 +25,7 @@ public class VisitorParserImpl implements VisitorParser {
             visitor.setAddress(obj.getString("address"));
             visitor.setBirthPlace(obj.getString("birthPlace"));
             visitor.setBirthDate(obj.getString("birthDate"));
+            visitor.setContactNumber(obj.getString("contactNumber"));
             visitor.setLastModifiedDate(obj.getString("lastModifiedDate"));
             visitor.setCreatedDate(obj.getString("createdDate"));
 //                break;

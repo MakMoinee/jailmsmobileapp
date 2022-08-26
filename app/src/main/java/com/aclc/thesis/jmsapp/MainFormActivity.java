@@ -3,22 +3,22 @@ package com.aclc.thesis.jmsapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.aclc.thesis.jmsapp.models.Users;
-import com.aclc.thesis.jmsapp.parsers.VisitorParser;
 import com.aclc.thesis.jmsapp.preference.UserPreference;
 import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
 import com.aclc.thesis.jmsapp.preference.VisitorPreference;
@@ -26,6 +26,7 @@ import com.aclc.thesis.jmsapp.preference.VisitorPreferenceImpl;
 import com.aclc.thesis.jmsapp.ui.home.HomeFragment;
 import com.aclc.thesis.jmsapp.ui.profile.ProfileFragment;
 import com.aclc.thesis.jmsapp.ui.qr.QRGeneratorFragment;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainFormActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,11 +40,10 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private TextView txtUsername, txtContactNum;
-    private VisitorParser visitorParser;
     private Fragment profileFragment;
     private VisitorPreference visitorPreference;
     private Toolbar toolbar;
-
+    private ImageView waveDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("JMS");
         setSupportActionBar(toolbar);
+        waveDown = findViewById(R.id.waveDown);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
@@ -68,12 +69,6 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        getData();
-    }
-
-    private void getData() {
-        visitorPreference = new VisitorPreferenceImpl(MainFormActivity.this);
-        txtUsername.setText(visitorPreference.getFullName());
     }
 
     private void setUser(View headerView) {
@@ -99,6 +94,7 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
                 ft.commit();
                 navigationView.setCheckedItem(R.id.nav_home);
                 toolbar.setTitle("JMS");
+                waveDown.setVisibility(View.VISIBLE);
                 break;
             case R.id.nav_profile:
                 profileFragment = new ProfileFragment(MainFormActivity.this);
@@ -108,6 +104,7 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
                 ft.commit();
                 navigationView.setCheckedItem(R.id.nav_profile);
                 toolbar.setTitle("Profile");
+                waveDown.setVisibility(View.INVISIBLE);
                 break;
             case R.id.nav_qr:
                 qrFragment = new QRGeneratorFragment(MainFormActivity.this);
@@ -117,6 +114,7 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
                 ft.commit();
                 navigationView.setCheckedItem(R.id.nav_qr);
                 toolbar.setTitle("QR Code");
+                waveDown.setVisibility(View.VISIBLE);
                 break;
             case R.id.nav_logout:
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainFormActivity.this);

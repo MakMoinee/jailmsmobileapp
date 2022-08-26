@@ -5,7 +5,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
+
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,8 @@ import com.aclc.thesis.jmsapp.preference.UserPreference;
 import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
 import com.aclc.thesis.jmsapp.service.QRCodeLocal;
 import com.aclc.thesis.jmsapp.service.QRCodeLocalImpl;
+import com.google.zxing.BarcodeFormat;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.sql.Timestamp;
 
@@ -40,8 +44,20 @@ public class QRGeneratorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = LayoutInflater.from(mContext).inflate(R.layout.fragment_qr_generator, container, false);
         initListener(mView);
-        createQR();
+//        createQR();
+        createNewQR();
         return mView;
+    }
+
+    private void createNewQR() {
+        try {
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            String data = getData();
+            Bitmap bitmap = barcodeEncoder.encodeBitmap(data, BarcodeFormat.QR_CODE, 400, 400);
+            imgView.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            Toast.makeText(mContext, "Error in createNewQR()->" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void createQR() {

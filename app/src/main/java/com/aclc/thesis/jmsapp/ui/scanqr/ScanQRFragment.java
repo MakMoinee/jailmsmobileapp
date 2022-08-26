@@ -6,10 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +13,34 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.aclc.thesis.jmsapp.R;
-import com.aclc.thesis.jmsapp.service.FragmentIntentIntegrator;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 @SuppressLint("ValidFragment")
 public class ScanQRFragment extends Fragment {
     private Context mContext;
     private Button btnScan;
     private TextView txtContent;
+    private ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(), result -> {
+        if (result.getContents() == null) {
+            Toast.makeText(mContext, "Cancelled", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(mContext, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+        }
+    });
 
     public ScanQRFragment(Context mContext) {
         this.mContext = mContext;
+
     }
 
     @Override
@@ -37,6 +48,10 @@ public class ScanQRFragment extends Fragment {
         View mView = LayoutInflater.from(mContext).inflate(R.layout.fragment_scan_qr, container, false);
         initViews(mView);
         initListeners(mView);
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 123);
+        }
         return mView;
     }
 
@@ -49,10 +64,17 @@ public class ScanQRFragment extends Fragment {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 123);
                 } else {
                     //                FragmentIntentIntegrator intentIntegrator = new FragmentIntentIntegrator(ScanQRFragment.this);
-                    IntentIntegrator intentIntegrator = new FragmentIntentIntegrator(ScanQRFragment.this);
-                    intentIntegrator.setPrompt("Scan a barcode or QR Code");
-                    intentIntegrator.setOrientationLocked(true);
-                    intentIntegrator.initiateScan();
+//                    IntentIntegrator intentIntegrator = new FragmentIntentIntegrator(ScanQRFragment.this);
+//                    intentIntegrator.setPrompt("Scan a barcode or QR Code");
+//                    intentIntegrator.setOrientationLocked(true);
+//                    intentIntegrator.initiateScan();
+                    ScanOptions options = new ScanOptions();
+                    options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+                    options.setPrompt("Scan a barcode");
+                    options.setCameraId(0);  // Use a specific camera of the device
+                    options.setBeepEnabled(false);
+                    options.setBarcodeImageEnabled(true);
+                    barcodeLauncher.launch(options);
                 }
 
             }
@@ -65,10 +87,17 @@ public class ScanQRFragment extends Fragment {
         if (requestCode == 123) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(mContext, "Camera permission granted", Toast.LENGTH_LONG).show();
-                IntentIntegrator intentIntegrator = new FragmentIntentIntegrator(ScanQRFragment.this);
-                intentIntegrator.setPrompt("Scan a barcode or QR Code");
-                intentIntegrator.setOrientationLocked(true);
-                intentIntegrator.initiateScan();
+//                IntentIntegrator intentIntegrator = new FragmentIntentIntegrator(ScanQRFragment.this);
+//                intentIntegrator.setPrompt("Scan a barcode or QR Code");
+//                intentIntegrator.setOrientationLocked(true);
+//                intentIntegrator.initiateScan();
+                ScanOptions options = new ScanOptions();
+                options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES);
+                options.setPrompt("Scan a barcode");
+                options.setCameraId(0);  // Use a specific camera of the device
+                options.setBeepEnabled(false);
+                options.setBarcodeImageEnabled(true);
+                barcodeLauncher.launch(options);
             } else {
                 Toast.makeText(mContext, "Camera permission denied", Toast.LENGTH_LONG).show();
             }
