@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,11 +23,13 @@
             android:name=".AdminFormActivity"
             android:exported="false"
             android:label="@string/title_activity_admin_form"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.JmsApp.NoActionBar" />
         <activity
             android:name=".MainFormActivity"
             android:exported="false"
             android:label="@string/title_activity_main_form"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.JmsApp.NoActionBar" />
         <activity
             android:name=".MainActivity"

@@ -20,6 +20,7 @@ public class Constants {
     public static String CREATE_ACCOUNT_PATH = "/create/jms/user";
     public static ConfigPreference config = new ConfigPrefImpl();
     public static String CONTENT_BODY = "application/json; charset=utf-8";
+    public static String CONTENT_MULTIPART = "multipart/form-data;boundary=";
     public static Map<String, String> routeMap;
 
     public static Boolean setIp(Context mContext) {

@@ -146,6 +146,7 @@
                 android:textStyle="bold" />
 
             <EditText
+
                 android:id="@+id/editAddress"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -276,12 +277,46 @@
                 android:textColorHint="@android:color/black"
                 android:textSize="15sp" />
 
+            <TextView
+                android:id="@+id/lblValidID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bdMonth"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Valid ID:"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imgValidID"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/lblValidID"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/grey_cursor_color"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/btnBrowse"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgValidID"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Browse"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:theme="@style/Platform.MaterialComponents" />
+
             <Button
                 android:id="@+id/btnCreateAccount"
                 style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/bdMonth"
+                android:layout_below="@+id/btnBrowse"
                 android:layout_marginTop="25dp"
                 android:background="#00cba9"
                 android:padding="10dp"

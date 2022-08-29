@@ -16,4 +16,5 @@ public class Visitor {
     String contactNumber;
     String lastModifiedDate;
     String createdDate;
+    byte[] validID;
 }

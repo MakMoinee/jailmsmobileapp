@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.aclc.thesis.jmsapp.models.Users;
+import com.aclc.thesis.jmsapp.models.Visitor;
 import com.aclc.thesis.jmsapp.preference.UserPreference;
 import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
 import com.aclc.thesis.jmsapp.preference.VisitorPreference;
@@ -127,6 +128,7 @@ public class MainFormActivity extends AppCompatActivity implements NavigationVie
                             case DialogInterface.BUTTON_NEGATIVE:
                                 Users users = new Users();
                                 new UserPreferenceImpl(MainFormActivity.this).setUsers(users);
+                                new VisitorPreferenceImpl(MainFormActivity.this).storeVisitor(new Visitor());
                                 Intent intent = new Intent(MainFormActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();

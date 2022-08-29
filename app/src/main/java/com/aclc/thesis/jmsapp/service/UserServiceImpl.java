@@ -26,6 +26,7 @@ import java.util.Map;
 
 public class UserServiceImpl implements UserService {
 
+    private final String boundary = "apiclient-" + System.currentTimeMillis();
 
     @Override
     public void retrieveUser(Context mContext, ProgressDialog progressDialog, RestRequest restRequest) {
