@@ -2,6 +2,8 @@ package com.aclc.thesis.jmsapp.ui.scanqr;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,7 +21,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.aclc.thesis.jmsapp.MainFormActivity;
 import com.aclc.thesis.jmsapp.R;
+import com.aclc.thesis.jmsapp.VisitorDetailsActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.ScanContract;
@@ -34,9 +38,21 @@ public class ScanQRFragment extends Fragment {
         if (result.getContents() == null) {
             Toast.makeText(mContext, "Cancelled", Toast.LENGTH_LONG).show();
         } else {
+            Toast.makeText(mContext, "Scan Successfully", Toast.LENGTH_SHORT).show();
             Toast.makeText(mContext, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            showDetails(result.getContents());
         }
     });
+
+    @SuppressLint("NewApi")
+    private void showDetails(String contents) {
+        try {
+            Intent intent = new Intent(mContext, VisitorDetailsActivity.class);
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) mContext).toBundle());
+        } catch (Exception e) {
+            Toast.makeText(mContext, "Error >>" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public ScanQRFragment(Context mContext) {
         this.mContext = mContext;

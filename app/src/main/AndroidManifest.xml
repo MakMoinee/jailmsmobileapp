@@ -32,6 +32,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.JmsApp.NoActionBar" />
         <activity
+            android:name=".VisitorDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.JmsApp.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
