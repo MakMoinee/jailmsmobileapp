@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ public class QRGeneratorFragment extends Fragment {
         try {
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             String data = getData();
+            Log.e("DATA", data);
             Bitmap bitmap = barcodeEncoder.encodeBitmap(data, BarcodeFormat.QR_CODE, 400, 400);
             imgView.setImageBitmap(bitmap);
         } catch (Exception e) {

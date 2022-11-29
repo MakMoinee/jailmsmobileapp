@@ -2,13 +2,11 @@ package com.aclc.thesis.jmsapp.ui.scanqr;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +16,10 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.aclc.thesis.jmsapp.MainFormActivity;
 import com.aclc.thesis.jmsapp.R;
 import com.aclc.thesis.jmsapp.VisitorDetailsActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -41,12 +37,13 @@ public class ScanQRFragment extends Fragment {
             Toast.makeText(mContext, "Cancelled", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(mContext, "Scan Successfully", Toast.LENGTH_SHORT).show();
-            Toast.makeText(mContext, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            Log.e("Scanned ", result.getContents());
             showDetails(result.getContents());
         }
     });
 
     private void showDetails(String contents) {
+        Log.e("CONTENT", contents);
         Intent intent = new Intent(mContext, VisitorDetailsActivity.class);
         intent.putExtra("content", contents);
         startActivity(intent);
@@ -84,6 +81,8 @@ public class ScanQRFragment extends Fragment {
 //                    intentIntegrator.initiateScan();
                     ScanOptions options = new ScanOptions();
                     options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+                    options.setOrientationLocked(false);
+                    options.setTimeout(50000);
                     options.setPrompt("Scan a barcode");
                     options.setCameraId(0);  // Use a specific camera of the device
                     options.setBeepEnabled(false);
@@ -106,7 +105,9 @@ public class ScanQRFragment extends Fragment {
 //                intentIntegrator.setOrientationLocked(true);
 //                intentIntegrator.initiateScan();
                 ScanOptions options = new ScanOptions();
-                options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES);
+                options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+                options.setOrientationLocked(false);
+                options.setTimeout(50000);
                 options.setPrompt("Scan a barcode");
                 options.setCameraId(0);  // Use a specific camera of the device
                 options.setBeepEnabled(false);

@@ -13,9 +13,9 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launchers"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_rounds"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JmsApp"
         android:usesCleartextTraffic="true">
@@ -35,7 +35,7 @@
             android:name=".VisitorDetailsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.JmsApp.NoActionBar" />
+            android:theme="@style/CustomJMS" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

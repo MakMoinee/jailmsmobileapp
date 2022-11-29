@@ -33,6 +33,8 @@
         <entry key="..\:/jailmsmobileapp/app/src/main/res/layout/activity_create_account.xml" value="0.25" />
         <entry key="..\:/jailmsmobileapp/app/src/main/res/layout/activity_details_visitor.xml" value="0.20416666666666666" />
         <entry key="..\:/jailmsmobileapp/app/src/main/res/layout/activity_main_form.xml" value="0.20416666666666666" />
+        <entry key="..\:/jailmsmobileapp/app/src/main/res/layout/dialog_forgot_pass.xml" value="0.1" />
+        <entry key="..\:/jailmsmobileapp/app/src/main/res/layout/dialog_mark_visit.xml" value="0.43186582809224316" />
         <entry key="..\:/jailmsmobileapp/app/src/main/res/layout/fragment_profile.xml" value="0.4074074074074074" />
       </map>
     </option>
