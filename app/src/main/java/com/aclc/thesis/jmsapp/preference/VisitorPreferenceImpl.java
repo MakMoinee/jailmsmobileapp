@@ -25,6 +25,7 @@ public class VisitorPreferenceImpl implements VisitorPreference {
         editor.putString("firstName", visitor.getFirstName());
         editor.putString("lastName", visitor.getLastName());
         editor.putString("middleName", visitor.getMiddleName());
+        editor.putString("address", visitor.getAddress());
         editor.putString("birthPlace", visitor.getBirthPlace());
         editor.putString("birthDate", visitor.getBirthDate());
         editor.putString("contactNumber", visitor.getContactNumber());
@@ -54,6 +55,7 @@ public class VisitorPreferenceImpl implements VisitorPreference {
         visitor.setFirstName(pref.getString("firstName", ""));
         visitor.setMiddleName(pref.getString("middleName", ""));
         visitor.setLastName(pref.getString("lastName", ""));
+        visitor.setAddress(pref.getString("address", ""));
         visitor.setBirthPlace(pref.getString("birthPlace", ""));
         visitor.setBirthDate(pref.getString("birthDate", ""));
         visitor.setContactNumber(pref.getString("contactNumber", ""));
