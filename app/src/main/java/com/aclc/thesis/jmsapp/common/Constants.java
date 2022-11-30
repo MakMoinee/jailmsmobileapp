@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Constants {
-    public static String IP_ADDRESS = "10.0.254.7:8443";
+    public static String IP_ADDRESS = "vps-6ce65c2c.vps.ovh.ca:8085";
     public static String PROTOCOL = "http://";
     public static String FULL_URL = PROTOCOL + IP_ADDRESS;
     public static String LOGIN_PATH = "/get/jms/users";

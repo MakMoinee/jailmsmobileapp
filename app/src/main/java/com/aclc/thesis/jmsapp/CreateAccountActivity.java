@@ -117,6 +117,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                         visitor.setBirthDate(bdate);
                         visitor.setAddress(editAddress.getText().toString());
                         visitor.setContactNumber(editContactNum.getText().toString());
+//                        visitor.setValidID(tempVisitor.getValidID());
                         progressDialog.show();
                         btnCreate.setEnabled(false);
                         userService.createUser(CreateAccountActivity.this, users, visitor, progressDialog, new RestRequest() {
