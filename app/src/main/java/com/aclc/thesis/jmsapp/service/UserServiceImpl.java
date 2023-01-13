@@ -21,9 +21,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class UserServiceImpl implements UserService {
 
     private final String boundary = "apiclient-" + System.currentTimeMillis();
@@ -110,6 +107,7 @@ public class UserServiceImpl implements UserService {
             return;
         }
         String userReq = new Gson().toJson(user);
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.PROTOCOL + Constants.IP_ADDRESS + Constants.CREATE_ACCOUNT_PATH, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

@@ -8,6 +8,7 @@ import com.aclc.thesis.jmsapp.common.Constants;
 import com.aclc.thesis.jmsapp.preference.UserPreference;
 import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
 import com.aclc.thesis.jmsapp.utility.LocalUtil;
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -67,6 +68,32 @@ public class SimpleRequest {
                 0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        queue.add(stringRequest);
+    }
+
+    public void SendSimplePost(Context mContext, String body, String path, ProgressDialog progressDialog, RestRequest restRequest) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,Constants.PROTOCOL + Constants.IP_ADDRESS + path, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                restRequest.onSuccess(response, progressDialog);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                restRequest.onError(error, progressDialog);
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return Constants.CONTENT_BODY;
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                return body.getBytes();
+            }
+        };
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(stringRequest);
     }

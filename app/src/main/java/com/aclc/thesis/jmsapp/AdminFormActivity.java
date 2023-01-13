@@ -24,6 +24,7 @@ import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
 import com.aclc.thesis.jmsapp.ui.home.HomeFragment;
 import com.aclc.thesis.jmsapp.ui.profile.ProfileFragment;
 import com.aclc.thesis.jmsapp.ui.scanqr.ScanQRFragment;
+import com.aclc.thesis.jmsapp.ui.visithistory.VisitorHistoryFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminFormActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +39,7 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
     private UserPreference userPreference;
     private Fragment scanQRFragment;
     private Fragment profileFragment;
+    private Fragment visitorHistoryFragment;
     private TextView txtLabel;
 
     @Override
@@ -70,6 +72,7 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
         userPreference = new UserPreferenceImpl(AdminFormActivity.this);
         Users users = userPreference.getUsers();
         txtLabel.setText(users.getUserName());
+
     }
 
     @Override
@@ -81,6 +84,13 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.frame, homeFragment, null);
+                ft.commit();
+                break;
+            case R.id.nav_visit:
+                visitorHistoryFragment = new VisitorHistoryFragment(AdminFormActivity.this);
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.frame, visitorHistoryFragment, null);
                 ft.commit();
                 break;
             case R.id.nav_profile:

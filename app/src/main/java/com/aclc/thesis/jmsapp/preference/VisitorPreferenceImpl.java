@@ -52,6 +52,7 @@ public class VisitorPreferenceImpl implements VisitorPreference {
     public Visitor getVisitor() {
         pref = context.getSharedPreferences("visitor", Context.MODE_PRIVATE);
         Visitor visitor = new Visitor();
+        visitor.setVisitorID(pref.getInt("visitorID",0));
         visitor.setFirstName(pref.getString("firstName", ""));
         visitor.setMiddleName(pref.getString("middleName", ""));
         visitor.setLastName(pref.getString("lastName", ""));

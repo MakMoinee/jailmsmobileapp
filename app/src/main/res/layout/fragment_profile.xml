@@ -19,7 +19,7 @@
             android:layout_height="150dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_baseline_account_circle_24" />
+            android:src="@drawable/visitor" />
 
         <TextView
             android:id="@+id/txtAccName"
@@ -247,6 +247,52 @@
             android:layout_below="@+id/txtBdate"
             android:layout_marginTop="5dp"
             android:background="@color/black" />
+
+
+        <TextView
+            android:id="@+id/lblContactNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view6"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Contact Number:"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtContactNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view6"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/lblContactNum"
+            android:fontFamily="@font/poppins_regular"
+            android:text="asdasd"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/lblContactNum"
+            android:layout_marginTop="5dp"
+            android:background="@color/black" />
+
+        <Button
+            android:id="@+id/btnUpdateProfile"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view7"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:text="Update Profile" />
 
 
     </RelativeLayout>
