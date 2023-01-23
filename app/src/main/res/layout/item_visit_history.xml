@@ -13,8 +13,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Visitor Name:"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_toRightOf="@+id/lblVisitorName"
             android:text="Sample"
             android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/lblVisitDate"
@@ -34,8 +34,8 @@
             android:layout_below="@+id/lblVisitorName"
             android:layout_marginTop="15dp"
             android:text="Visitor Date:"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <TextView
@@ -48,6 +48,29 @@
             android:layout_toRightOf="@+id/lblVisitDate"
             android:text="Sample"
             android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/lblVisitOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblVisitDate"
+            android:layout_marginTop="15dp"
+            android:text="Visitor Log Out Date:"
+            android:textColor="@color/purple_500"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtVisitOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtVisitDate"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/lblVisitOut"
+            android:text="Sample"
+            android:textColor="@android:color/black"
+            android:textSize="13sp" />
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

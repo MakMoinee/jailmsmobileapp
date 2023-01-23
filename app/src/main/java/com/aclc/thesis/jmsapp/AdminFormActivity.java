@@ -22,6 +22,7 @@ import com.aclc.thesis.jmsapp.models.Users;
 import com.aclc.thesis.jmsapp.preference.UserPreference;
 import com.aclc.thesis.jmsapp.preference.UserPreferenceImpl;
 import com.aclc.thesis.jmsapp.ui.home.HomeFragment;
+import com.aclc.thesis.jmsapp.ui.inmates.InmatesFragment;
 import com.aclc.thesis.jmsapp.ui.profile.ProfileFragment;
 import com.aclc.thesis.jmsapp.ui.scanqr.ScanQRFragment;
 import com.aclc.thesis.jmsapp.ui.visithistory.VisitorHistoryFragment;
@@ -40,6 +41,7 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
     private Fragment scanQRFragment;
     private Fragment profileFragment;
     private Fragment visitorHistoryFragment;
+    private Fragment inmatesFragment;
     private TextView txtLabel;
 
     @Override
@@ -84,6 +86,7 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.frame, homeFragment, null);
+                toolbar.setTitle("Police JMS");
                 ft.commit();
                 break;
             case R.id.nav_visit:
@@ -91,6 +94,17 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.frame, visitorHistoryFragment, null);
+                toolbar.setTitle("Visit History");
+                ft.commit();
+                break;
+            case R.id.nav_reports:
+                break;
+            case R.id.nav_inmates:
+                inmatesFragment = new InmatesFragment(AdminFormActivity.this);
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.frame, inmatesFragment, null);
+                toolbar.setTitle("Inmates");
                 ft.commit();
                 break;
             case R.id.nav_profile:
@@ -98,6 +112,7 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.frame, profileFragment, null);
+                toolbar.setTitle("Profile");
                 ft.commit();
                 break;
             case R.id.nav_qr:
@@ -105,6 +120,7 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.frame, scanQRFragment, null);
+                toolbar.setTitle("Scan QR");
                 ft.commit();
                 break;
             case R.id.nav_logout:

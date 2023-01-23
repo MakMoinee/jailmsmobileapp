@@ -30,7 +30,7 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/btnProceed"
+        android:id="@+id/btnLogout"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="20dp"
-        android:text="Proceed"
+        android:text="Logout"
         android:textSize="14sp" />
 
 </RelativeLayout>

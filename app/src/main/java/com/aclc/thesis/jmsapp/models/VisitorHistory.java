@@ -11,5 +11,6 @@ public class VisitorHistory {
     String lastName;
     String remarks;
     String visitDate;
+    String visitOut;
 
 }

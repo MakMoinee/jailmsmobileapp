@@ -4,7 +4,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     routeMap.put(routes.getRouteName(), routes.getRouteValue());
                 }
 
+                Log.e("MAP", routeMap.toString());
+
                 Constants.routeMap = routeMap;
                 processDialog.dismiss();
                 processDialog.setMessage("Logging in ...");
@@ -140,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onError(VolleyError e, ProgressDialog progressDialog) {
                             processDialog.dismiss();
+                            Log.e("ERROR_LOG_USER", e.getMessage());
                             Toast.makeText(MainActivity.this, "Wrong username or password.", Toast.LENGTH_SHORT).show();
                         }
                     });

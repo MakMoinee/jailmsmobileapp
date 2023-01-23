@@ -9,14 +9,19 @@ import android.widget.TextView;
 
 import com.aclc.thesis.jmsapp.R;
 import com.aclc.thesis.jmsapp.models.VisitorHistory;
+import com.aclc.thesis.jmsapp.preference.LogoutPref;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class VisitorHistoryAdapter extends BaseAdapter {
 
     Context mContext;
     List<VisitorHistory> visitorHistoryList;
-    TextView txtName, txtVisitDate;
+    TextView txtName, txtVisitDate, txtVisitOut, lblVisitOut;
+    View thisView;
 
     public VisitorHistoryAdapter(Context mContext, List<VisitorHistory> visitorHistoryList) {
         this.mContext = mContext;
@@ -41,6 +46,7 @@ public class VisitorHistoryAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View mView = LayoutInflater.from(mContext).inflate(R.layout.item_visit_history, null, false);
+        thisView = mView;
         initViews(mView);
         setValues(position);
         return mView;
@@ -49,11 +55,35 @@ public class VisitorHistoryAdapter extends BaseAdapter {
     private void setValues(int position) {
         VisitorHistory visitorHistory = visitorHistoryList.get(position);
         txtName.setText(visitorHistory.getLastName() + ", " + visitorHistory.getFirstName() + " " + visitorHistory.getMiddleName());
-        txtVisitDate.setText(visitorHistory.getVisitDate());
+        String visitDate = "";
+        try {
+            Date date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a").parse(visitorHistory.getVisitDate());
+            visitDate = String.valueOf(date1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            visitDate = visitorHistory.getVisitDate();
+        }
+        txtVisitDate.setText(visitDate);
+
+        String vhOut = new LogoutPref(mContext).getOut(visitorHistory.getVisitorHistoryID());
+        if (vhOut != null && vhOut != "") {
+            lblVisitOut.setVisibility(View.VISIBLE);
+            txtVisitOut.setVisibility(View.VISIBLE);
+            txtVisitOut.setText(vhOut);
+        } else {
+            lblVisitOut.setVisibility(View.GONE);
+            txtVisitOut.setVisibility(View.GONE);
+        }
     }
 
     private void initViews(View mView) {
         txtName = mView.findViewById(R.id.txtName);
         txtVisitDate = mView.findViewById(R.id.txtVisitDate);
+        txtVisitOut = mView.findViewById(R.id.txtVisitOut);
+        lblVisitOut = mView.findViewById(R.id.lblVisitOut);
+    }
+
+    public View getMyView() {
+        return thisView;
     }
 }

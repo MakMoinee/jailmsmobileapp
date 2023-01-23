@@ -21,11 +21,11 @@ public class SimpleRequest {
     private UserPreference userPreference;
 
     public void SendRequest(Context mContext, ProgressDialog progressDialog, RestRequest restRequest) {
-        boolean isConnected = LocalUtil.isNetworkConnected(mContext);
-        if (!isConnected) {
-            Toast.makeText(mContext, "Please make sure you are connected to internet", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        boolean isConnected = LocalUtil.isNetworkConnected(mContext);
+//        if (!isConnected) {
+//            Toast.makeText(mContext, "Please make sure you are connected to internet", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.PROTOCOL + Constants.IP_ADDRESS + "/info", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -51,7 +51,7 @@ public class SimpleRequest {
             Toast.makeText(mContext, "Please make sure you are connected to internet", Toast.LENGTH_SHORT).show();
             VolleyError e = new VolleyError("Not connected to internet");
             restRequest.onError(e, progressDialog);
-            return;
+//            return;
         }
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.PROTOCOL + Constants.IP_ADDRESS + path, new Response.Listener<String>() {
             @Override

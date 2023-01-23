@@ -25,6 +25,7 @@ public class VisitorHistoryParser {
                 visitorHistory.setLastName(obj.getString("lastName"));
                 visitorHistory.setRemarks(obj.getString("remarks"));
                 visitorHistory.setVisitDate(obj.getString("visitDateTime"));
+                visitorHistory.setVisitOut(obj.getString("visitOut"));
                 visitorHistoryList.add(visitorHistory);
             }
 

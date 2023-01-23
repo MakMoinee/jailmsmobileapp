@@ -59,13 +59,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logUser(Context mContext, Users users, ProgressDialog progressDialog, RestRequest mReq) {
-        boolean isConnected = LocalUtil.isNetworkConnected(mContext);
-        if (!isConnected) {
-            Toast.makeText(mContext, "Please make sure you are connected to internet", Toast.LENGTH_SHORT).show();
-            VolleyError e = new VolleyError("Not connected to internet");
-            mReq.onError(e, progressDialog);
-            return;
-        }
+//        boolean isConnected = LocalUtil.isNetworkConnected(mContext);
+//        if (!isConnected) {
+//            Toast.makeText(mContext, "Please make sure you are connected to internet", Toast.LENGTH_SHORT).show();
+//            VolleyError e = new VolleyError("Not connected to internet");
+//            mReq.onError(e, progressDialog);
+//            return;
+//        }
         String path = Constants.routeMap.get("LogUser");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.PROTOCOL + Constants.IP_ADDRESS + path, new Response.Listener<String>() {
             @Override
