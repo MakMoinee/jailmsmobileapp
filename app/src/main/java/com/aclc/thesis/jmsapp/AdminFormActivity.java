@@ -97,16 +97,16 @@ public class AdminFormActivity extends AppCompatActivity implements NavigationVi
                 toolbar.setTitle("Visit History");
                 ft.commit();
                 break;
-            case R.id.nav_reports:
-                break;
-            case R.id.nav_inmates:
-                inmatesFragment = new InmatesFragment(AdminFormActivity.this);
-                fm = getSupportFragmentManager();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.frame, inmatesFragment, null);
-                toolbar.setTitle("Inmates");
-                ft.commit();
-                break;
+//            case R.id.nav_reports:
+//                break;
+//            case R.id.nav_inmates:
+//                inmatesFragment = new InmatesFragment(AdminFormActivity.this);
+//                fm = getSupportFragmentManager();
+//                ft = fm.beginTransaction();
+//                ft.replace(R.id.frame, inmatesFragment, null);
+//                toolbar.setTitle("Inmates");
+//                ft.commit();
+//                break;
             case R.id.nav_profile:
                 profileFragment = new ProfileFragment(AdminFormActivity.this);
                 fm = getSupportFragmentManager();
